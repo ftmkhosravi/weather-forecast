@@ -64,12 +64,43 @@ function showFahrenheitTemperature(event) {
 }
 
 function showCelsiusTemperature(event) {
-    event.preventDefault();
-    fahrenheitLink.classList.remove("active");
-    celsiusLink.classList.add("active");
-    let temp = document.querySelector("#temperature");
-    temp.innerHTML = Math.round(celsiusTemperature);
-  }
+  event.preventDefault();
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  let temp = document.querySelector("#temperature");
+  temp.innerHTML = Math.round(celsiusTemperature);
+}
+
+function displayDailyForecastWeather() {
+  let forecastElement = document.querySelector(".weather-forecast");
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ];
+  let forecast = `<div class="row">`;
+  days.forEach(day => {
+    forecast = forecast + `
+          <div class="col-2">
+              <div class="weather-forecast-date">${day}</div>
+              <img src="img/cloudy.png" alt="" width="36">
+              <div class="weather-forecast-temperatures">
+                <span class="weather-forecast-temperatures-min">
+                  12°
+                </span>
+                <span class="weather-forecast-temperatures-max">
+                  18°
+                </span>
+              </div>
+            </div>`;
+    
+  });
+  forecast = forecast + `</div>`;
+  forecastElement.innerHTML = forecast;
+}
 let celsiusTemperature = null;
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
@@ -79,3 +110,4 @@ fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemperature);
+displayDailyForecastWeather();
